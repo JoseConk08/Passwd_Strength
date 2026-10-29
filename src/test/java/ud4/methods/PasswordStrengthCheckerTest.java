@@ -132,7 +132,52 @@ class PasswordStrengthCheckerTest {
         }
     }
 
-    // MediumPasswords
+    @Nested
+    @DisplayName("Contrasenyes mitjanes")
+    class MediumPasswords {
+
+        @Test
+        @DisplayName("Minúscules i majúscules és mitjana")
+        void lowercaseAndUppercase_shouldReturnMedium() {
+            // Arrange
+            String password = "Abcdefgh";
+            PasswordStrength expected = PasswordStrength.MEDIUM;
+
+            // Act
+            PasswordStrength actual = PasswordStrengthChecker.checkStrength(password);
+
+            // Assert
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        @DisplayName("Minúscules i símbols és mitjana")
+        void lowercaseAndSymbols_shouldReturnMedium() {
+            // Arrange
+            String password = "abcdefg!";
+            PasswordStrength expected = PasswordStrength.MEDIUM;
+
+            // Act
+            PasswordStrength actual = PasswordStrengthChecker.checkStrength(password);
+
+            // Assert
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        @DisplayName("Majúscules i símbols és mitjana")
+        void uppercaseAndSymbols_shouldReturnMedium() {
+            // Arrange
+            String password = "ABCDEFG!";
+            PasswordStrength expected = PasswordStrength.MEDIUM;
+
+            // Act
+            PasswordStrength actual = PasswordStrengthChecker.checkStrength(password);
+
+            // Assert
+            assertEquals(expected, actual);
+        }
+    }
 
     // StrongPasswords
 }
