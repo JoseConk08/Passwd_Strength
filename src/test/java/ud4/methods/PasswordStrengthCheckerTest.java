@@ -10,7 +10,66 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DisplayName("PasswordStrengthChecker")
 class PasswordStrengthCheckerTest {
 
-    // InvalidPasswords
+    @Nested
+    @DisplayName("Contrasenyes invàlides")
+    class InvalidPasswords {
+
+        @Test
+        @DisplayName("Una contrasenya nul·la és invàlida")
+        void nullPassword_shouldReturnInvalid() {
+            // Arrange
+            String password = null;
+            PasswordStrength expected = PasswordStrength.INVALID;
+
+            // Act
+            PasswordStrength actual = PasswordStrengthChecker.checkStrength(password);
+
+            // Assert
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        @DisplayName("Una contrasenya buida és invàlida")
+        void emptyPassword_shouldReturnInvalid() {
+            // Arrange
+            String password = "";
+            PasswordStrength expected = PasswordStrength.INVALID;
+
+            // Act
+            PasswordStrength actual = PasswordStrengthChecker.checkStrength(password);
+
+            // Assert
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        @DisplayName("Una contrasenya de 7 caràcters és invàlida")
+        void sevenCharacters_shouldReturnInvalid() {
+            // Arrange
+            String password = "Abcde1!";
+            PasswordStrength expected = PasswordStrength.INVALID;
+
+            // Act
+            PasswordStrength actual = PasswordStrengthChecker.checkStrength(password);
+
+            // Assert
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        @DisplayName("Una contrasenya forta massa curta és invàlida")
+        void strongButTooShort_shouldReturnInvalid() {
+            // Arrange
+            String password = "Ab1!";
+            PasswordStrength expected = PasswordStrength.INVALID;
+
+            // Act
+            PasswordStrength actual = PasswordStrengthChecker.checkStrength(password);
+
+            // Assert
+            assertEquals(expected, actual);
+        }
+    }
 
     // WeakPasswords
 
