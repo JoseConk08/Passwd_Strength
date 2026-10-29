@@ -16,5 +16,50 @@ class PasswordStrengthCheckerTest {
 
     // MediumPasswords
 
-    // StrongPasswords
+    @Nested
+    @DisplayName("Contrasenyes fortes")
+    class StrongPasswords {
+
+        @Test
+        @DisplayName("Minúscules, majúscules i símbols és forta")
+        void allTypes_shouldReturnStrong() {
+            // Arrange
+            String password = "Abcdefg!";
+            PasswordStrength expected = PasswordStrength.STRONG;
+
+            // Act
+            PasswordStrength actual = PasswordStrengthChecker.checkStrength(password);
+
+            // Assert
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        @DisplayName("Una contrasenya forta amb dígits és forta")
+        void allTypesWithDigits_shouldReturnStrong() {
+            // Arrange
+            String password = "A!bC3dEf";
+            PasswordStrength expected = PasswordStrength.STRONG;
+
+            // Act
+            PasswordStrength actual = PasswordStrengthChecker.checkStrength(password);
+
+            // Assert
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        @DisplayName("Una contrasenya de 8 caràcters amb tots els tipus és forta")
+        void eightCharactersAllTypes_shouldReturnStrong() {
+            // Arrange
+            String password = "aB3!defg";
+            PasswordStrength expected = PasswordStrength.STRONG;
+
+            // Act
+            PasswordStrength actual = PasswordStrengthChecker.checkStrength(password);
+
+            // Assert
+            assertEquals(expected, actual);
+        }
+    }
 }
